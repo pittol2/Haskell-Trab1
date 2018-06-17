@@ -12,7 +12,28 @@ vercheg n b = cheg n >= aber b
 verpart n b ip = fech b >= cheg n + ip!!(idb b - 1)!!(idn n - 1)
                      -- && part n > fech b 
 
---filaNavios
+--filaNavios :: [Navio] -> [Navio]
+
+filaNavios ln = if null (tail ln)
+                   then ln
+                else if menor (head ln) ln 
+                        then head ln : filaNavios(tail ln)
+                     else filaNavios((tail ln ++ [head ln]))
+
+menor a ln = a == minimum ln
+
+filaNavios' :: [Navio] -> [Navio]
+filaNavios' ln = if null (tail ln)
+                    then ln
+                else if menor' (head tch) tch 
+                        then head ln : filaNavios'(tail ln)
+                    else filaNavios'((tail ln ++ [head ln]))
+        where
+            tch = [cheg x | x <- ln]
+
+
+menor' a tch = a == minimum tch
+
 
 
 
